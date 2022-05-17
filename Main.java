@@ -3,21 +3,23 @@ import java.util.Scanner;
 
 class Main {
   public static void main(String[] args) {    
-    Service1 s = new Service1();
-    Scanner skan = new Scanner(System.in);
     try {
-      int x=4;
+      Service1 s = new Service1();
+      boolean dziala = true;
       String imie;
+      String nazwisko;
       int wiek;
-      String born;
+      String data;
       System.out.println("Witaj!");
-      while(x!=0)
+      while(dziala)
         {
+          Scanner skan = new Scanner(System.in);
           System.out.println("Wybierz funkcję: \n"+
                         "1 - dodanie nowego studenta \n"+
                         "2 - wyszukanie danego studenta \n"+
-                        "3 - wyjście z programu");
-          x=skan.nextInt();
+                        "3 - wyszukiwanie po imieniu\n"+
+                        "4 - wyjście z programu");
+          int x=skan.nextInt();
           switch(x)
             {
                 case 1:
@@ -25,34 +27,38 @@ class Main {
                   Scanner skan1 = new Scanner(System.in);
                   System.out.println("Podaj imie: ");
                   imie=skan1.nextLine();
+                  System.out.println("Podaj nazwisko: ");
+                  nazwisko=skan1.nextLine();
                   System.out.println("Podaj wiek: ");
-                  wiek=skan.nextInt();
-                  System.out.println("Podaj datę urodzenia: ");
-                  born=skan1.nextLine();
-                  s.addStudent(new Student(imie, wiek, born));
+                  wiek=skan1.nextInt();
+                  skan1.nextLine();
+                  System.out.println("Podaj date urodzenia: ");
+                  data=skan1.nextLine();
+                  s.addStudent(new Student(imie,nazwisko, wiek,data));
                 }break;
               case 2:
                 {
-                   var students = s.getStudents();
-      for(Student current : students) {
-        System.out.println(current.ToString());
+                  var students = s.getStudents();
+                  for(Student current : students) {
+                  System.out.println(current.ToString());
+        
       }
                 }break;
               case 3:
                 {
-                  x=0;
+                  Scanner skan1 = new Scanner(System.in);
+                  System.out.println("Podaj imie: ");
+                  imie=skan1.nextLine();
+                  s.findStudentByName(imie);
+                  
+                };
+              case 4:
+                {
+                  dziala = false;
                 }break;
             }
             
         }
-      
-      //s.addStudent(new Student("Krzysztof", 20));
-     // s.addStudent(new Student("Janusz", 40));
-
-     // var students = s.getStudents();
-     // for(Student current : students) {
-      //  System.out.println(current.ToString());
-      //}
     } catch (IOException e) {
 
     }
